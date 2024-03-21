@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>js leccion 10</title>
+    </head>
+    <body>
+        <h1 class="titulo" id="cabecera">leccion 10</h1>
+        <p id="parrafo">manipulación del DOM</p>
+        <p id="parrafo1">parrafo con id para manipulación del DOM 1</p>
+        <p id="parrafo2">parrafo con id para manipulación del DOM 2</p>
+        <p id="parrafo3">parrafo con id para manipulación del DOM 3</p>
+
+        <h1 class="titulo2" id="cabecera2">otro titulo</h1>
+
+        <p class="rojo">parrafo con class para manipulación del DOM 4</p>
+        <p class="rojo">parrafo con class para manipulación del DOM 5</p>
+        <p class="rojo">parrafo con class para manipulación del DOM 6</p>
+
+        <form id="formulario" action="">
+            <input type="text" name="nombre" value="dario" />
+            <br />
+            <input type="text" name="apellido" value="gomez" />
+            <br />
+        </form>
+        <button onclick="mostrarValores(); mostrarValores2()">mostrar</button>
+
+        <div id="valores"></div>
+
+        <div id="valores2"></div>
+
+        <button onclick="activar()">Modificar Titulo</button>
+
+        <br />
+        <img
+            id="imagen"
+            src="https://www.todoperro.es/fotos/archivos/p75111.jpg"
+            alt=""
+            width="200"
+        />
+        <br />
+        <button onclick="gatoPerro()">perro/gato</button>
+
+        <script src="leccion10.js"></script>
+    </body>
+</html>
