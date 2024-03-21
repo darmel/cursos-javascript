@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>js leccion 11</title>
+    </head>
+    <body onload="cargado()">
+        <h1 class="titulo" id="cabecera" onclick="cambiartexto(this)">
+            leccion 11
+        </h1>
+        <p id="parrafo">manejo de eventos con el DOM</p>
+        <p id="parrafo1">parrafo con id para manipulación del DOM 1</p>
+        <p id="parrafo2">parrafo con id para manipulación del DOM 2</p>
+        <p id="parrafo3">parrafo con id para manipulación del DOM 3</p>
+
+        <h1 class="titulo2" id="cabecera2">otro titulo</h1>
+
+        <input type="text" onchange="convertir(this)" />
+
+        <h1 onmouseover="rojo(this)" onmouseout="azul(this)">
+            titulo para probar onmouseover y onmouseout
+        </h1>
+
+        <h1 onmousedown="verde(this)" onmouseup="naranja(this)">
+            titulo para probar onmousedown y onmouseup
+        </h1>
+
+        <input type=" text" onfocus="rosa(this)" onblur="amarillo(this)" />
+        <br />
+        <br />
+        <input id="nombre" type=" text" />
+
+        <script src="leccion11.js"></script>
+    </body>
+</html>
