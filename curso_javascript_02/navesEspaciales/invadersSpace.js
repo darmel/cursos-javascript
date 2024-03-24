@@ -10,6 +10,7 @@ game = {
     colorBala: "red",
     balas_array: new Array(),
     enemigos_array: new Array(),
+    disparo: false,
 };
 
 //cosntantes
@@ -22,12 +23,12 @@ const BARRA = 32;
 
 //objetos
 function Bala(x, y, w) {
-    console.log("funcion bala");
+    //console.log("funcion bala");
     this.x = x;
     this.y = y;
     this.w = w;
     this.dibujar = function () {
-        console.log("dibujar bala");
+        //console.log("dibujar bala");
         //dibujar la balas_arra
         game.ctx.save();
         game.ctx.fillStyle = game.colorBala;
@@ -50,12 +51,57 @@ function Enemigo(x, y) {
     this.x = x;
     this.y = y;
     this.w = 35;
-    this.dx = 5;
+    this.veces = 0;
+    this.dx = 10;
     this.ciclos = 0;
     this.num = 14;
     this.figura = true;
     this.vive = true;
-    this.dibujar = function () {};
+    this.dibujar = function () {
+        //retraso
+        if (this.ciclos > 30) {
+            //saltos
+            if (this.veces > this.num) {
+                this.dx *= -1;
+                this.veces = 0;
+                this.num = 28;
+                this.y += 20;
+                this.dx = this.dx > 0 ? this.dx++ : this.dx--;
+            } else {
+                this.x += this.dx;
+            }
+            this.veces++;
+            this.ciclos = 0;
+            this.figura = !this.figura;
+        } else {
+            this.ciclos++;
+        }
+
+        if (this.figura) {
+            game.ctx.drawImage(
+                game.imagenEnemigo,
+                0,
+                0,
+                40,
+                30,
+                this.x,
+                this.y,
+                35,
+                30
+            );
+        } else
+            game.ctx.drawImage(
+                game.imagenEnemigo,
+                50,
+                0,
+                35,
+                30,
+                this.x,
+                this.y,
+                35,
+                30
+            );
+    };
 }
 
 //funciones
@@ -90,6 +136,35 @@ const animar = () => {
     requestAnimationFrame(animar);
     verificar();
     pintar();
+    colisiones();
+};
+
+const colisiones = () => {
+    let enemigo, bala;
+    //console.log("colisiones");
+    for (var i = 0; i < game.enemigos_array.length; i++) {
+        console.log("colisiones");
+        for (var j = 0; j < game.balas_array.length; j++) {
+            enemigo = game.enemigos_array[i];
+            bala = game.balas_array[j];
+
+            if (enemigo != null && bala != null) {
+                console.log("enemigo disparos");
+                if (
+                    bala.x > enemigo.x &&
+                    bala.x < enemigo.x + enemigo.w &&
+                    bala.y > enemigo.y &&
+                    bala.y < enemigo.y + enemigo.w
+                ) {
+                    console.log("enemigo muerto");
+                    enemigo.vive = false;
+                    game.enemigos_array[i] = null;
+                    game.balas_array[j] = null;
+                    game.disparo = false;
+                }
+            }
+        }
+    }
 };
 
 const verificar = () => {
@@ -124,6 +199,13 @@ const pintar = () => {
         if (game.balas_array[i] != null) {
             game.balas_array[i].dibujar();
             if (game.balas_array[i].y < 0) game.balas_array[i] = null;
+        }
+    }
+
+    //enemigos
+    for (i = 0; i < game.enemigos_array.length; i++) {
+        if (game.enemigos_array[i] != null) {
+            game.enemigos_array[i].dibujar();
         }
     }
 
@@ -163,6 +245,19 @@ window.onload = function () {
         if (game.ctx) {
             game.imagen = new Image();
             game.imagen.src = "nave.png";
+
+            //crear enemigos
+            game.imagenEnemigo = new Image();
+            game.imagenEnemigo.src = "invader.fw.png";
+            game.imagenEnemigo.onload = function () {
+                for (var i = 0; i < 5; i++) {
+                    for (var j = 0; j < 10; j++) {
+                        game.enemigos_array.push(
+                            new Enemigo(100 + 40 * j, 30 + 45 * i) //crea un enemigo, j las columnas, i las filas
+                        );
+                    }
+                }
+            };
 
             caratula();
             game.canvas.addEventListener("click", seleccionar, false);
