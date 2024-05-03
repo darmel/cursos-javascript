@@ -1,47 +1,44 @@
-body{
+body {
     padding: 0;
     margin: 0;
     background: linear-gradient(to right, #123123, #f45);
     display: flex;
     justify-content: center;
-
 }
 
-.calculadora-grilla{
+.calculadora-grilla {
     display: flexbox;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     height: 100px;
-    
 }
 
-.resultado{
+.resultado {
     padding: 20px;
     background-color: #123123;
     justify-content: right;
     display: flex;
-    height: 110px;   
+    height: 80px;
 }
 
-.resultado-numeros{
+.resultado-numeros {
     background-color: aqua;
     text-align: right;
     font-weight: bolder;
     font-size: 25px;
-    
 }
 
-::placeholder{
+::placeholder {
     color: black;
 }
 
-.botones{
+.botones {
     display: grid;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: minmax(120px, auto) repeat(4, 100px);
 }
 
-.botones > button{
+.botones > button {
     font-size: 50px;
     background-color: rgb(120, 223, 188);
 }
