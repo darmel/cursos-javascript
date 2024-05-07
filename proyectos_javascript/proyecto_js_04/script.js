@@ -4,23 +4,34 @@ console.log("hola a todos");
 const resultados = document.getElementById("resultados");
 let unidad = "";
 
+//radius
+kg = document.getElementById("kg");
+g = document.getElementById("g");
+l = document.getElementById("l");
+u = document.getElementById("u");
+
 //funcion para obtener cual ruadio button de unidades esta seleccioando
 function unidades() {
     //define que unidad usar
-    if (document.getElementById("kg1").checked == true) {
+    if (kg.checked == true) {
         console.log("Kg");
         unidad = "kg";
-    } else if (document.getElementById("g1").checked == true) {
+        return true;
+    } else if (g.checked == true) {
         console.log("g");
         unidad = "g";
-    } else if (document.getElementById("l1").checked == true) {
+        return true;
+    } else if (l.checked == true) {
         console.log("l");
         unidad = "l";
-    } else if (document.getElementById("u1").checked == true) {
+        return true;
+    } else if (u.checked == true) {
         console.log("u");
         unidad = "u";
+        return true;
     } else {
         alert("seleccione unidad");
+        return false;
     }
 }
 
@@ -30,10 +41,9 @@ function calcular() {
     const cantidad = parseFloat(document.getElementById("cantidad").value);
     const product = document.getElementById("product").value;
 
-    if (product !== "" && !isNaN(cantidad) && !isNaN(precio)) {
-        //define que unidad usar
-        unidades();
+    //comprobar selccion de unidad
 
+    if (product !== "" && !isNaN(cantidad) && !isNaN(precio) && unidades()) {
         //calculo
         precioPorunidad = parseFloat(precio / cantidad);
         console.log("precio" + precio);
